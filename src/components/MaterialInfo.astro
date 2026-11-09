@@ -1,0 +1,49 @@
+---
+import { calculateArticleCost, formatCost } from '../lib/generation-cost.mjs';
+import { readingMetrics } from '../lib/material-metrics.mjs';
+
+interface Props {
+  materialType: 'dream' | 'idea';
+  body: string;
+  metadata?: any;
+  sourceHref?: string;
+  sourceTitle?: string;
+}
+
+const { materialType, body, metadata = null, sourceHref, sourceTitle } = Astro.props;
+const metrics = readingMetrics(body);
+const runs = metadata?.runs || [];
+const articleCost = calculateArticleCost(runs);
+const models = [...new Set(runs.map(run => run.model).filter(Boolean))];
+const versions = [...new Set(runs.map(run => run.processVersion).filter(Boolean))];
+const hasCompleteUsage = runs.length > 0 && runs.every(run => run.usage);
+const usage = hasCompleteUsage ? runs.reduce((total, run) => ({
+  inputTokens: total.inputTokens + run.usage.inputTokens,
+  cachedInputTokens: total.cachedInputTokens + run.usage.cachedInputTokens,
+  outputTokens: total.outputTokens + run.usage.outputTokens
+}), { inputTokens: 0, cachedInputTokens: 0, outputTokens: 0 }) : null;
+---
+
+<details class="material-info">
+  <summary aria-label="Informacje o materiale" aria-describedby="material-info-tooltip" title="Informacje i metryki">
+    <span aria-hidden="true">i</span>
+    <span class="tooltip" id="material-info-tooltip" role="tooltip">Informacje i metryki</span>
+  </summary>
+  <div class="material-info-panel">
+    <h2>Informacje o materiale</h2>
+    <dl>
+      <div><dt>Typ</dt><dd>{materialType === 'dream' ? 'Sen Iskry' : 'Interpretacja'}</dd></div>
+      {sourceHref && <div><dt>Źródło</dt><dd><a href={sourceHref}>{sourceTitle || 'Sen źródłowy'}</a></dd></div>}
+      <div><dt>Liczba słów</dt><dd>{metrics.words}</dd></div>
+      <div><dt>Czas czytania</dt><dd>około {metrics.readingMinutes} min</dd></div>
+      <div><dt>Model</dt><dd>{models.length ? models.join(', ') : 'Brak danych'}</dd></div>
+      <div><dt>Liczba wywołań</dt><dd>{runs.length || 'Brak danych'}</dd></div>
+      <div><dt>Input tokens</dt><dd>{usage ? usage.inputTokens : 'Brak danych'}</dd></div>
+      <div><dt>Cached input tokens</dt><dd>{usage ? usage.cachedInputTokens : 'Brak danych'}</dd></div>
+      <div><dt>Output tokens</dt><dd>{usage ? usage.outputTokens : 'Brak danych'}</dd></div>
+      <div><dt>Koszt wygenerowania</dt><dd>{articleCost.cost ? formatCost(articleCost.cost.usd, 'USD') : 'Brak danych'}</dd></div>
+      {articleCost.cost?.pln !== null && articleCost.cost?.pln !== undefined && <div><dt>Koszt orientacyjny</dt><dd>{formatCost(articleCost.cost.pln, 'PLN')}</dd></div>}
+      <div><dt>Wersja procesu</dt><dd>{versions.length ? versions.join(', ') : 'Brak danych'}</dd></div>
+    </dl>
+  </div>
+</details>

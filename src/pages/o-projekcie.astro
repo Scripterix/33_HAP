@@ -1,0 +1,78 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '../components/SiteLayout.astro';
+import { loadMaterialRegistry } from '../lib/material-registry.mjs';
+import { loadAllGenerationSidecars } from '../lib/generation-metadata.mjs';
+import { validateEvaluations } from '../lib/evaluation-validation.mjs';
+import { calculateProjectStats } from '../lib/project-stats.mjs';
+import { formatCost } from '../lib/generation-cost.mjs';
+
+const registry = await loadMaterialRegistry();
+const sidecars = await loadAllGenerationSidecars();
+const evaluations = (await getCollection('ewaluacje')).filter(item => item.data?.evaluationId);
+const evaluationValidation = validateEvaluations(evaluations, registry);
+if (!evaluationValidation.valid) throw new Error(evaluationValidation.errors.join(' '));
+const stats = calculateProjectStats({ registry, sidecars, evaluations });
+---
+
+<SiteLayout title="Projekt HAP — Sny Iskry i Pomysły" description="Jak powstają Sny Iskry, interpretacje Writera i dalsze eksperymenty." current="project">
+  <p class="eyebrow">O projekcie</p>
+  <h1>Projekt HAP</h1>
+  <p class="page-intro">Projekt łączy niezależną opowieść literacką z późniejszą analizą jej idei. Najpierw powstaje Sen Iskry, którego treść nie jest podporządkowana produktom ani automatyzacjom. Dopiero później Writer szuka w nim pytań, mechanizmów i kierunków wartych sprawdzenia.</p>
+
+  <ol class="process-flow" aria-label="Główne fazy projektu HAP">
+    <li>Sen</li><li>Interpretacja i pomysł</li><li>Ewaluacja i decyzja</li><li>Eksperyment lub prototyp</li>
+  </ol>
+
+  <section class="project-section">
+    <h2>Jak powstają Sny Iskry</h2>
+    <p>Sny Iskry są samodzielnymi opowieściami literackimi. Rozwijają własne światy, postacie, konflikty i pytania. Nie powstają jako opisy funkcji ani zamówienia na produkty.</p>
+    <ul>
+      <li>Sen rozpoczyna się od konkretnego wydarzenia, dźwięku, ruchu, problemu albo codziennej czynności.</li>
+      <li>Creative Intelligence wybiera temat i formę, chyba że Scripterix poda wskazówkę dla konkretnej opowieści.</li>
+      <li>Stałe zasady redakcyjne pilnują spójności, jakości i różnorodności konstrukcji.</li>
+      <li>Sen kończy się pytaniem. Dopiero później może rozpocząć się interpretacja.</li>
+    </ul>
+    <p class="project-note">Najpierw powstaje historia. Dopiero później sprawdzamy, czy ukryła się w niej idea warta rozwinięcia.</p>
+  </section>
+
+  <section class="project-section">
+    <h2>Jak powstają Pomysły ze snów</h2>
+    <p>Pomysły nie są planowane przed napisaniem snu. Writer analizuje ukończoną opowieść i szuka w niej problemów, mechanizmów, zależności oraz możliwości.</p>
+    <ul>
+      <li>Writer otrzymuje gotowy, niezmieniany Sen Iskry.</li>
+      <li>Oddziela metaforę literacką od możliwego zastosowania.</li>
+      <li>Formułuje kierunki, ale nie przedstawia ich jako gotowych produktów.</li>
+      <li>Pomysł pozostaje hipotezą, a człowiek decyduje o dalszej ewaluacji.</li>
+    </ul>
+    <p class="project-note">Writer nie dopisuje produktu do snu. Odkrywa możliwość dopiero w opowieści, która już powstała.</p>
+  </section>
+
+  <section class="project-section">
+    <h2>Co dzieje się dalej</h2>
+    <p>Wybrane pomysły mogą przejść osobny proces ewaluacji. Sprawdzamy wtedy problem, odbiorcę, ryzyka i najmniejszy eksperyment pozwalający zweryfikować hipotezę.</p>
+    <p class="detailed-flow">Sen → Writer → Pomysł → Ewaluacja → Eksperyment → Prototyp</p>
+    <dl class="status-list">
+      <div><dt>Nowy</dt><dd>pomysł nie został jeszcze oceniony.</dd></div>
+      <div><dt>Inkubacja</dt><dd>warto do niego wrócić, ale brakuje danych.</dd></div>
+      <div><dt>Do ewaluacji</dt><dd>wybrany do dokładniejszej analizy.</dd></div>
+      <div><dt>Do eksperymentu</dt><dd>istnieje hipoteza możliwa do sprawdzenia.</dd></div>
+      <div><dt>Prototyp</dt><dd>rozpoczęto budowę.</dd></div>
+      <div><dt>Odrzucony</dt><dd>zachowuje uzasadnienie i zdobytą wiedzę, ale nie będzie rozwijany.</dd></div>
+    </dl>
+  </section>
+
+  <section class="project-section project-stats">
+    <h2>Projekt w liczbach</h2>
+    <dl>
+      <div><dt>Sny w archiwum</dt><dd>{stats.dreams}</dd></div>
+      <div><dt>Wydobyte pomysły</dt><dd>{stats.ideas}</dd></div>
+      <div><dt>Ewaluacje</dt><dd>{stats.evaluations}</dd></div>
+      <div><dt>Rozpoczęte eksperymenty</dt><dd>{stats.experiments}</dd></div>
+      <div><dt>Prototypy</dt><dd>{stats.prototypes}</dd></div>
+      <div><dt>Zarejestrowany koszt</dt><dd>{stats.registeredCostUsd === null ? 'Brak danych' : formatCost(stats.registeredCostUsd, 'USD')}</dd></div>
+      <div><dt>Materiały bez danych kosztowych</dt><dd>{stats.missingCostMaterials}</dd></div>
+    </dl>
+  </section>
+  <footer>HAP · Opowieść, interpretacja i decyzja człowieka</footer>
+</SiteLayout>

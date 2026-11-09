@@ -1,0 +1,42 @@
+---
+import { getCollection, render } from 'astro:content';
+import SiteLayout from '../../components/SiteLayout.astro';
+import MaterialInfo from '../../components/MaterialInfo.astro';
+import { findMaterial, findMaterialById, loadMaterialRegistry } from '../../lib/material-registry.mjs';
+import { loadGenerationSidecar } from '../../lib/generation-metadata.mjs';
+import { findActiveEvaluation, validateEvaluations } from '../../lib/evaluation-validation.mjs';
+export async function getStaticPaths() {
+ const pomysly = await getCollection('pomysly');
+ return pomysly.filter(p=>p.id.endsWith('-automatyzacja')).map(p => ({ params: { id: p.id }, props: { pomysl: p } }));
+}
+const { pomysl } = Astro.props;
+const { Content } = await render(pomysl);
+const registry = await loadMaterialRegistry();
+const material = findMaterial(registry, 'idea', pomysl.id);
+if (!material) throw new Error(`Brak materialId dla pomysłu ${pomysl.id}.`);
+const sourceMaterial = findMaterialById(registry, material.sourceMaterialId);
+if (!sourceMaterial) throw new Error(`Brak źródłowego snu dla pomysłu ${pomysl.id}.`);
+const sourceId = sourceMaterial.slug;
+const sny = await getCollection('sny');
+const sen = sny.find(s=>s.id===sourceId);
+const sourceTitle = sen?.body.match(/^#\s+(.+)$/m)?.[1] || sourceId.replaceAll('-',' ');
+const metadata = await loadGenerationSidecar(process.cwd(), 'idea', material.materialId);
+const evaluations = (await getCollection('ewaluacje')).filter(item => item.data?.evaluationId);
+const evaluationValidation = validateEvaluations(evaluations, registry);
+if (!evaluationValidation.valid) throw new Error(evaluationValidation.errors.join(' '));
+const evaluation = findActiveEvaluation(evaluations, material.materialId);
+---
+<SiteLayout title={`${sourceTitle} — Pomysł HAP`} current="pomysly">
+<div class="material-header">
+  <p class="eyebrow">Pomysł ze snu · szkic Writera</p>
+  <div class="material-tools">
+    <MaterialInfo materialType="idea" body={pomysl.body} metadata={metadata} sourceHref={`/sny/${sourceId}/`} sourceTitle={sourceTitle} />
+    {evaluation && <a class="evaluation-link" href={`/pomysly/${pomysl.id}/ewaluacja/`} title="Otwórz ewaluację i dalszy rozwój pomysłu">Ewaluacja</a>}
+  </div>
+</div>
+<h1>{sourceTitle}</h1>
+{sen && <p class="source-link">Na podstawie opowieści: <a href={`/sny/${sourceId}/`}>przeczytaj oryginalny sen →</a></p>}
+<article class="story analysis"><Content /></article>
+{sen && <aside class="related"><p class="eyebrow">Źródło inspiracji</p><h2>Wróć do opowieści</h2><p>Interpretacja jest osobnym tekstem. Sen pozostaje niezmieniony.</p><a class="text-action" href={`/sny/${sourceId}/`}>Czytaj sen →</a></aside>}
+<footer><a href="/pomysly/">← Wszystkie pomysły</a></footer>
+</SiteLayout>

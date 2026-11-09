@@ -1,0 +1,28 @@
+---
+import { getCollection, render } from 'astro:content';
+import SiteLayout from '../../components/SiteLayout.astro';
+import MaterialInfo from '../../components/MaterialInfo.astro';
+import { findMaterial, loadMaterialRegistry } from '../../lib/material-registry.mjs';
+import { loadGenerationSidecar } from '../../lib/generation-metadata.mjs';
+export async function getStaticPaths() {
+ const sny = await getCollection('sny');
+ return sny.map(sen => ({ params: { id: sen.id }, props: { sen } }));
+}
+const { sen } = Astro.props;
+const { Content } = await render(sen);
+const pomysly = await getCollection('pomysly');
+const pomysl = pomysly.find(p => p.id === `${sen.id}-automatyzacja`);
+const registry = await loadMaterialRegistry();
+const material = findMaterial(registry, 'dream', sen.id);
+if (!material) throw new Error(`Brak materialId dla snu ${sen.id}.`);
+const metadata = await loadGenerationSidecar(process.cwd(), 'dream', material.materialId);
+---
+<SiteLayout title="Sen Iskry — HAP" current="sny">
+<div class="material-header">
+  <p class="eyebrow">Sen Iskry · oryginalna opowieść</p>
+  <div class="material-tools"><MaterialInfo materialType="dream" body={sen.body} metadata={metadata} /></div>
+</div>
+<article class="story"><Content /></article>
+{pomysl && <aside class="related"><p class="eyebrow">Z tego snu powstał pomysł</p><h2>Inna perspektywa tej historii</h2><p>Writer analizuje ideę, możliwości i konsekwencje wynikające z opowieści.</p><a class="text-action" href={`/pomysly/${pomysl.id}/`}>Przejdź do interpretacji →</a></aside>}
+<footer><a href="/">← Wszystkie sny</a></footer>
+</SiteLayout>

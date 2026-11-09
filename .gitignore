@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+
+node_modules/
+dist/
+.astro/
+
+*.log
+.DS_Store
+.playwright-mcp/
+.codex-canvas/

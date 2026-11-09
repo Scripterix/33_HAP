@@ -1,0 +1,53 @@
+---
+import { getCollection, render } from 'astro:content';
+import SiteLayout from '../../../components/SiteLayout.astro';
+import { findMaterialById, loadMaterialRegistry } from '../../../lib/material-registry.mjs';
+import { validateEvaluations } from '../../../lib/evaluation-validation.mjs';
+
+export async function getStaticPaths() {
+  const registry = await loadMaterialRegistry();
+  const evaluations = (await getCollection('ewaluacje')).filter(item => item.data?.evaluationId);
+  const validation = validateEvaluations(evaluations, registry);
+  if (!validation.valid) throw new Error(validation.errors.join(' '));
+  return evaluations.filter(evaluation => evaluation.data.status !== 'Odrzucony').map(evaluation => {
+    const idea = findMaterialById(registry, evaluation.data.ideaId);
+    return { params: { id: idea.slug }, props: { evaluation, idea } };
+  });
+}
+
+const { evaluation, idea } = Astro.props;
+const { Content } = await render(evaluation);
+const registry = await loadMaterialRegistry();
+const dream = findMaterialById(registry, idea.sourceMaterialId);
+const fields = [
+  ['Problem', evaluation.data.problem],
+  ['Potencjalny odbiorca', evaluation.data.audience],
+  ['Obserwacje i dowody', evaluation.data.evidence],
+  ['Założenia', evaluation.data.assumptions],
+  ['Hipotezy wymagające sprawdzenia', evaluation.data.hypotheses],
+  ['Wartość możliwa do uzyskania', evaluation.data.potentialValue],
+  ['Ryzyka', evaluation.data.risks],
+  ['Trudność techniczna', evaluation.data.technicalDifficulty],
+  ['Szacowany koszt eksperymentu', evaluation.data.experimentCost],
+  ['Najmniejszy sensowny eksperyment', evaluation.data.minimumExperiment],
+  ['Kryterium powodzenia', evaluation.data.successCriterion],
+  ['Kryterium przerwania', evaluation.data.stopCriterion],
+  ['Decyzja', evaluation.data.decision],
+  ['Kolejny krok', evaluation.data.nextStep]
+].filter(([, value]) => value);
+---
+
+<SiteLayout title="Ewaluacja pomysłu — HAP" current="pomysly">
+  <p class="eyebrow">Ewaluacja pomysłu</p>
+  <h1>{evaluation.data.title || idea.slug.replaceAll('-', ' ')}</h1>
+  <p class="source-link">Status: {evaluation.data.status}</p>
+  <div class="evaluation-relations">
+    <a href={`/sny/${dream.slug}/`}>Źródłowy sen</a>
+    <a href={`/pomysly/${idea.slug}/`}>Interpretowany pomysł</a>
+  </div>
+  <article class="story evaluation">
+    {fields.map(([label, value]) => <section><h2>{label}</h2><p>{value}</p></section>)}
+    <Content />
+  </article>
+  <footer><a href={`/pomysly/${idea.slug}/`}>← Wróć do pomysłu</a></footer>
+</SiteLayout>

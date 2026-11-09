@@ -1,0 +1,20 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '../components/SiteLayout.astro';
+import ContentCard from '../components/ContentCard.astro';
+import ArchiveToolbar from '../components/ArchiveToolbar.astro';
+import { cardExcerpt } from '../lib/material-metrics.mjs';
+const publishedTime = entry => Date.parse(String(entry.data.publishedAt || '')) || 0;
+const sny = (await getCollection('sny')).sort((a,b) => publishedTime(b) - publishedTime(a));
+const pomysly = await getCollection('pomysly');
+const dreamTitle = (entry) => entry.body.match(/^#\s+(.+)$/m)?.[1] || entry.id.replaceAll('-', ' ');
+const linked = (sen) => pomysly.find(p => p.id === `${sen.id}-automatyzacja`);
+---
+<SiteLayout title="HAP — Sny Iskry" description="Sny Iskry i pomysły zrodzone z opowieści." current="sny">
+  <p class="eyebrow">Human-Sourced Autonomous Publishing</p>
+  <h1>Sny Iskry</h1>
+  <p class="page-intro">Opowieści pozostają przede wszystkim opowieściami. Każda otwiera własny świat i kończy się pytaniem. Niektóre stają się początkiem nowych idei.</p>
+  <ArchiveToolbar title="Archiwum snów" targetId="dream-archive" />
+  <ul class="dreams" id="dream-archive">{sny.map(sen => <li data-published-at={String(sen.data.publishedAt)}><ContentCard eyebrow="Opowieść · Sen Iskry" title={dreamTitle(sen)} href={`/sny/${sen.id}/`} description={cardExcerpt(sen.body)} headingLevel="h3">{linked(sen) && <span slot="meta" class="hint">Ma interpretację Writera</span>}<a slot="actions" class="text-action" href={`/sny/${sen.id}/`}>Czytaj sen →</a>{linked(sen) && <a slot="actions" class="subtle-link" href={`/pomysly/${linked(sen).id}/`}>Poznaj pomysł</a>}</ContentCard></li>)}</ul>
+  <footer>HAP · Eksperyment literacki i analityczny</footer>
+</SiteLayout>

@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '../../components/SiteLayout.astro';
+import ContentCard from '../../components/ContentCard.astro';
+import ArchiveToolbar from '../../components/ArchiveToolbar.astro';
+import { cardExcerpt } from '../../lib/material-metrics.mjs';
+const publishedTime = entry => Date.parse(String(entry.data.publishedAt || '')) || 0;
+const pomysly = (await getCollection('pomysly')).filter(p => p.id.endsWith('-automatyzacja')).sort((a,b) => publishedTime(b) - publishedTime(a));
+const sny = await getCollection('sny');
+const sourceId = p => p.id.replace(/-automatyzacja$/, '');
+const sourceTitle = p => sny.find(s=>s.id===sourceId(p))?.body.match(/^#\s+(.+)$/m)?.[1] || sourceId(p).replaceAll('-',' ');
+---
+<SiteLayout title="Pomysły ze snów — HAP" description="Interpretacje Snów Iskry: technologie, społeczeństwo, gospodarka i eksperymenty." current="pomysly">
+<p class="eyebrow">Laboratorium idei</p><h1>Pomysły ze snów</h1><p class="page-intro">Pomysły wyrastają z pytań pozostawionych przez sny. Writer wydobywa z nich problemy i możliwe kierunki. To interpretacje do sprawdzenia, nie gotowe projekty.</p>
+<ArchiveToolbar title="Archiwum pomysłów" targetId="idea-archive" />
+<div class="idea-list" id="idea-archive">{pomysly.map(p=><ContentCard eyebrow="Interpretacja · wersja robocza" title={sourceTitle(p)} href={`/pomysly/${p.id}/`} description={cardExcerpt(p.body)} publishedAt={String(p.data.publishedAt)}><a slot="actions" class="text-action" href={`/pomysly/${p.id}/`}>Czytaj pomysł →</a>{sny.some(s=>s.id===sourceId(p)) && <a slot="actions" class="subtle-link" href={`/sny/${sourceId(p)}/`}>Oryginalny sen</a>}</ContentCard>)}</div>
+<footer>Materiały robocze wymagają akceptacji przed publikacją.</footer>
+</SiteLayout>

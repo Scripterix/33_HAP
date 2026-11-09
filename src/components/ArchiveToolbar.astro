@@ -1,0 +1,49 @@
+---
+interface Props {
+  title: string;
+  targetId: string;
+}
+
+const { title, targetId } = Astro.props;
+---
+
+<div class="archive-toolbar">
+  <h2>{title}</h2>
+  <button class="archive-sort" type="button" data-sort-target={targetId} data-direction="desc" aria-label="Sortowanie od najnowszych. Zmień na od najstarszych." title="Od najnowszych">
+    <span aria-hidden="true">↓</span>
+  </button>
+</div>
+
+<script>
+  const initializeDateSort = (button: HTMLButtonElement) => {
+    if (button.dataset.ready === 'true') return;
+    button.dataset.ready = 'true';
+    const targetId = button.dataset.sortTarget;
+    const container = targetId ? document.getElementById(targetId) : null;
+    if (!container) return;
+
+    const updateLabel = (direction: 'asc' | 'desc') => {
+      const descending = direction === 'desc';
+      button.dataset.direction = direction;
+      button.querySelector('span')!.textContent = descending ? '↓' : '↑';
+      button.title = descending ? 'Od najnowszych' : 'Od najstarszych';
+      button.setAttribute('aria-label', descending
+        ? 'Sortowanie od najnowszych. Zmień na od najstarszych.'
+        : 'Sortowanie od najstarszych. Zmień na od najnowszych.');
+    };
+
+    button.addEventListener('click', () => {
+      const direction = button.dataset.direction === 'desc' ? 'asc' : 'desc';
+      const items = [...container.children] as HTMLElement[];
+      items.sort((a, b) => {
+        const aTime = Date.parse(a.dataset.publishedAt || '') || 0;
+        const bTime = Date.parse(b.dataset.publishedAt || '') || 0;
+        return direction === 'desc' ? bTime - aTime : aTime - bTime;
+      });
+      items.forEach(item => container.append(item));
+      updateLabel(direction);
+    });
+  };
+
+  document.querySelectorAll<HTMLButtonElement>('.archive-sort').forEach(initializeDateSort);
+</script>

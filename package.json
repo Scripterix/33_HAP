@@ -1,0 +1,22 @@
+{
+  "name": "034-hap",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dream": "node --env-file-if-exists=.env src/cli.mjs dream",
+    "writer": "node --env-file-if-exists=.env src/cli.mjs writer",
+    "list": "node src/cli.mjs list",
+    "test": "node --test",
+    "check": "node src/cli.mjs check",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "engines": {
+    "node": ">=22.10"
+  },
+  "dependencies": {
+    "astro": "^7.4.2"
+  }
+}

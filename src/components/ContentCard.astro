@@ -1,0 +1,23 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  href: string;
+  description: string;
+  headingLevel?: 'h2' | 'h3';
+  publishedAt?: string;
+}
+
+const { eyebrow, title, href, description, headingLevel = 'h2', publishedAt } = Astro.props;
+const Heading = headingLevel;
+---
+
+<article class="content-card" data-published-at={publishedAt}>
+  <div class="card-copy">
+    <p class="eyebrow">{eyebrow}</p>
+    <Heading class="card-title"><a href={href}>{title}</a></Heading>
+    <p class="card-description">{description}</p>
+    <slot name="meta" />
+  </div>
+  <div class="card-actions"><slot name="actions" /></div>
+</article>
