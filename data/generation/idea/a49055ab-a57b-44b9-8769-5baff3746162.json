@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "materialId": "a49055ab-a57b-44b9-8769-5baff3746162",
+  "materialType": "idea",
+  "slug": "piekarnia-nastepnego-dnia-automatyzacja",
+  "runs": [
+    {
+      "runId": "6fb4d5c7-ead0-469e-a220-ceba8f3a5e0e",
+      "purpose": "idea_interpretation",
+      "provider": "openai",
+      "model": "gpt-5-mini-2025-08-07",
+      "usage": {
+        "inputTokens": 2865,
+        "cachedInputTokens": 0,
+        "outputTokens": 3830
+      },
+      "rateSnapshot": {
+        "inputUsdPerMillion": 0.25,
+        "cachedInputUsdPerMillion": 0.025,
+        "outputUsdPerMillion": 2,
+        "pricingVersion": "2026-11-09",
+        "effectiveAt": "2026-11-09",
+        "source": "https://developers.openai.com/api/docs/models/gpt-5-mini"
+      },
+      "cost": {
+        "usd": 0.00837625,
+        "pln": null,
+        "usdPlnRate": null
+      },
+      "costReason": null,
+      "calculatedAt": "2026-11-11T17:28:52.069Z",
+      "processVersion": "writer-v1"
+    }
+  ]
+}

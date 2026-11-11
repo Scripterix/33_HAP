@@ -6,6 +6,7 @@ import { generate } from './openai.mjs';
 import { getModelPricing } from '../config/model-pricing.mjs';
 import { findMaterial, findMaterialById, loadMaterialRegistry, saveMaterialRegistry } from './lib/material-registry.mjs';
 import { createGenerationRun, loadAllGenerationSidecars, loadGenerationSidecar, saveGenerationSidecar } from './lib/generation-metadata.mjs';
+import { registerDream as registerDreamMaterial, loadRegisteredDream } from './lib/dream-registration.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dreams = path.join(root, 'sny-iskry');
@@ -25,9 +26,9 @@ async function saveNew(dir, basename, content) {
   throw new Error('Nie udało się znaleźć wolnej nazwy pliku');
 }
 
-async function recordGeneration({ filepath, materialType, sourceSlug = null, result, purpose, processVersion }) {
+async function recordGeneration({ root: projectRoot = root, filepath, materialType, sourceSlug = null, result, purpose, processVersion }) {
   const materialSlug = path.basename(filepath, '.md');
-  const registry = await loadMaterialRegistry(root);
+  const registry = await loadMaterialRegistry(projectRoot);
   let material = findMaterial(registry, materialType, materialSlug);
 
   if (!material) {
@@ -38,7 +39,7 @@ async function recordGeneration({ filepath, materialType, sourceSlug = null, res
       material.sourceMaterialId = source.materialId;
     }
     registry.materials.push(material);
-    await saveMaterialRegistry(root, registry);
+    await saveMaterialRegistry(projectRoot, registry);
   }
 
   const configuredRate = getModelPricing(result.model);
@@ -51,7 +52,7 @@ async function recordGeneration({ filepath, materialType, sourceSlug = null, res
     usdPlnRate: Number.isFinite(usdPlnValue) && usdPlnValue > 0 ? usdPlnValue : null,
     processVersion
   });
-  const sidecar = await loadGenerationSidecar(root, materialType, material.materialId) || {
+  const sidecar = await loadGenerationSidecar(projectRoot, materialType, material.materialId) || {
     schemaVersion: 1,
     materialId: material.materialId,
     materialType,
@@ -60,7 +61,7 @@ async function recordGeneration({ filepath, materialType, sourceSlug = null, res
   };
   sidecar.slug = materialSlug;
   sidecar.runs.push(run);
-  await saveGenerationSidecar(root, sidecar);
+  await saveGenerationSidecar(projectRoot, sidecar);
   return { materialId: material.materialId, run };
 }
 
@@ -107,14 +108,16 @@ async function check() {
   }
   console.log(`OK: ${files.length} snów, ${ideaFiles.length} pomysłów, ${sidecars.length} sidecarów; brak wymaganego połączenia z API.`);
 }
-async function writer(filename) {
+export async function writer(filename, { projectRoot = root, generateFn = generate } = {}) {
   if (!filename || !safeName(filename)) throw new Error('Podaj nazwę pliku .md, np. npm run writer -- sen-o-trzecim-krzesle.md');
-  const dream = await readFile(path.join(dreams, filename), 'utf8');
-  const instructions = await readFile(path.join(root, 'config/writer.md'), 'utf8');
-  const result = await generate(instructions, `Sen źródłowy: ${filename}\n\n${dream}`);
+  const sourceDream = await loadRegisteredDream(projectRoot, filename);
+  const instructions = await readFile(path.join(projectRoot, 'config/writer.md'), 'utf8');
+  const result = await generateFn(instructions, `Sen źródłowy: ${filename}\n\n${sourceDream.content}`);
   const output = `<!-- SOURCE: sny-iskry/${filename} -->\n\n${result.text}\n`;
-  const filepath = await saveNew(ideas, `${path.basename(filename, '.md')}-automatyzacja`, output);
+  const ideaDirectory = path.join(projectRoot, 'automatyzacje-md');
+  const filepath = await saveNew(ideaDirectory, `${path.basename(filename, '.md')}-automatyzacja`, output);
   const metadata = await recordWithoutRiskingContent({
+    root: projectRoot,
     filepath,
     materialType: 'idea',
     sourceSlug: path.basename(filename, '.md'),
@@ -122,7 +125,7 @@ async function writer(filename) {
     purpose: 'idea_interpretation',
     processVersion: 'writer-v1'
   });
-  console.log(`Zapisano interpretację Writera: ${path.relative(root, filepath)}`);
+  console.log(`Zapisano interpretację Writera: ${path.relative(projectRoot, filepath)}`);
   if (metadata) console.log(`Material ID: ${metadata.materialId}; run ID: ${metadata.run.runId}`);
   console.log(`Zużycie tokenów (API): ${JSON.stringify(result.usage || {})}`);
 }
@@ -141,11 +144,21 @@ async function dream() {
   if (metadata) console.log(`Material ID: ${metadata.materialId}; run ID: ${metadata.run.runId}`);
   console.log(`Zużycie tokenów (API): ${JSON.stringify(result.usage || {})}`);
 }
-try {
-  const [command, arg] = process.argv.slice(2);
-  if (command === 'list') await list();
-  else if (command === 'check') await check();
-  else if (command === 'writer') await writer(arg);
-  else if (command === 'dream') await dream();
-  else throw new Error('Komendy: npm run list | check | dream | writer -- NAZWA_SNU.md');
-} catch (e) { console.error('Błąd:', e.message); process.exitCode = 1; }
+
+async function registerDream(filename) {
+  const { material, created } = await registerDreamMaterial(root, filename);
+  console.log(`${created ? 'Zarejestrowano nowy sen' : 'Sen był już zarejestrowany'}: ${material.slug}`);
+  console.log(`Material ID: ${material.materialId}`);
+}
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  try {
+    const [command, arg] = process.argv.slice(2);
+    if (command === 'list') await list();
+    else if (command === 'check') await check();
+    else if (command === 'writer') await writer(arg);
+    else if (command === 'dream' || command === 'dream:generate') await dream();
+    else if (command === 'dream:register') await registerDream(arg);
+    else throw new Error('Komendy: npm run list | check | dream:register -- PLIK.md | dream[:generate] | writer -- PLIK.md');
+  } catch (e) { console.error('Błąd:', e.message); process.exitCode = 1; }
+}

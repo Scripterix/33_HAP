@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "materialId": "21626ab6-2746-4107-9bd7-780a0b597817",
+  "materialType": "dream",
+  "slug": "targ-pietnastu-sekund",
+  "runs": [
+    {
+      "runId": "709dcf8f-e3da-41aa-a002-53b839ff41be",
+      "purpose": "dream_generation",
+      "provider": "openai",
+      "model": "gpt-5-mini-2025-08-07",
+      "usage": {
+        "inputTokens": 133,
+        "cachedInputTokens": 0,
+        "outputTokens": 3555
+      },
+      "rateSnapshot": {
+        "inputUsdPerMillion": 0.25,
+        "cachedInputUsdPerMillion": 0.025,
+        "outputUsdPerMillion": 2,
+        "pricingVersion": "2026-11-09",
+        "effectiveAt": "2026-11-09",
+        "source": "https://developers.openai.com/api/docs/models/gpt-5-mini"
+      },
+      "cost": {
+        "usd": 0.00714325,
+        "pln": null,
+        "usdPlnRate": null
+      },
+      "costReason": null,
+      "calculatedAt": "2026-11-11T16:46:20.948Z",
+      "processVersion": "dream-v1"
+    }
+  ]
+}

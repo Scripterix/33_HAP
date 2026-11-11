@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "materialId": "2c999ab3-e9b6-4676-8958-3b0bf5d715da",
+  "materialType": "idea",
+  "slug": "ocean-na-lisciu-automatyzacja",
+  "runs": [
+    {
+      "runId": "51229439-35c7-487c-8004-0c834466eea6",
+      "purpose": "idea_interpretation",
+      "provider": "openai",
+      "model": "gpt-5-mini-2025-08-07",
+      "usage": {
+        "inputTokens": 2796,
+        "cachedInputTokens": 0,
+        "outputTokens": 4049
+      },
+      "rateSnapshot": {
+        "inputUsdPerMillion": 0.25,
+        "cachedInputUsdPerMillion": 0.025,
+        "outputUsdPerMillion": 2,
+        "pricingVersion": "2026-11-09",
+        "effectiveAt": "2026-11-09",
+        "source": "https://developers.openai.com/api/docs/models/gpt-5-mini"
+      },
+      "cost": {
+        "usd": 0.008797,
+        "pln": null,
+        "usdPlnRate": null
+      },
+      "costReason": null,
+      "calculatedAt": "2026-11-11T17:25:07.284Z",
+      "processVersion": "writer-v1"
+    }
+  ]
+}

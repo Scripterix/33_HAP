@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dream": "node --env-file-if-exists=.env src/cli.mjs dream",
+    "dream:generate": "node --env-file-if-exists=.env src/cli.mjs dream:generate",
+    "dream:register": "node src/cli.mjs dream:register",
     "writer": "node --env-file-if-exists=.env src/cli.mjs writer",
     "list": "node src/cli.mjs list",
     "test": "node --test",

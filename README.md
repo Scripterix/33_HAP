@@ -14,7 +14,7 @@ Projekt działa lokalnie w Node.js i Astro. Repozytorium: [Scripterix/33_HAP](ht
 - `src/pages/` — strony Astro ze snami, pomysłami, powiązaniami między nimi i opisem projektu.
 - `config/` — prompty; `src/cli.mjs` — lokalna automatyzacja.
 
-Obecny zbiór obejmuje 11 snów i 11 pomysłów. Ostatni zweryfikowany build wygenerował 26 stron.
+Obecny zbiór obejmuje 14 snów i 12 pomysłów. Ostatni zweryfikowany build wygenerował 30 stron.
 
 ## Start
 
@@ -26,6 +26,18 @@ npm run dev
 ```
 
 `npm test` uruchamia testy kosztów i relacji. `npm run check` sprawdza spójność materiałów bez połączenia z API, a `npm run build` buduje statyczną stronę Astro.
+
+## Proces Snów Iskry
+
+1. Przygotuj sen w ChatGPT i zapisz go jako plik Markdown w `sny-iskry/`.
+2. Zarejestruj istniejący plik, aby otrzymał trwały `materialId`:
+
+   ```bash
+   npm run dream:register -- nazwa-snu.md
+   ```
+
+   Rejestracja nie generuje ani nie zmienia treści i jest bezpieczna do ponownego uruchomienia. Po rejestracji `npm run build` uwzględnia sen w Astro.
+3. Opcjonalnie uruchom Writer dla zarejestrowanego snu, aby utworzyć interpretację przez API.
 
 ## Writer
 
@@ -39,6 +51,6 @@ Writer CLI zapisuje interpretację Markdown w `automatyzacje-md/`, zachowuje pow
 
 Po autoryzowanym wywołaniu API CLI przekazuje `usage` zwrócone przez `src/openai.mjs` do `src/lib/generation-metadata.mjs`. Brak `usage` lub nieznany cennik jest zapisywany jako koszt nieznany, nigdy jako zero.
 
-`npm run dream` to opcjonalne generowanie snu przez API, niezależne od Scheduled Task w ChatGPT. Klucze API pozostają wyłącznie w lokalnym `.env`; projekt nie wykonuje automatycznego pushu ani wdrożenia.
+`npm run dream:generate` to opcjonalne generowanie snu przez API. Dotychczasowa komenda `npm run dream` pozostaje jej aliasem dla kompatybilności. Klucze API pozostają wyłącznie w lokalnym `.env`; projekt nie wykonuje automatycznego pushu ani wdrożenia.
 
 Decyzje i zadania: [AGENTS.md](AGENTS.md) · [ROADMAP.md](ROADMAP.md) · [CHANGELOG.md](CHANGELOG.md).

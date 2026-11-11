@@ -1,27 +1,159 @@
 {
   "schemaVersion": 1,
   "materials": [
-    { "materialId": "fbeed7dd-ffc3-4596-8f17-e6d65d2e7202", "materialType": "dream", "slug": "3154-rok" },
-    { "materialId": "d334f7cc-1b33-4739-ba4c-826fe560bf33", "materialType": "dream", "slug": "cywilizacja-nieomylna" },
-    { "materialId": "63471ca8-e034-4545-8b0f-8afe62a244c5", "materialType": "dream", "slug": "drzwi-ktore-pojawlily-sie-po-przejsciu" },
-    { "materialId": "18840f47-0fc0-4809-b2af-15706f83a9f3", "materialType": "dream", "slug": "godzina-ktorej-nikt-nie-przezyl" },
-    { "materialId": "38873cf8-b808-48d2-bea9-7ca0ce9a1f15", "materialType": "dream", "slug": "krawcowa-nocy" },
-    { "materialId": "5f164633-2f20-4369-93ac-81515a5f81ae", "materialType": "dream", "slug": "latarnia-strona-jutra" },
-    { "materialId": "beb5492e-3239-4850-96c9-66579d6a54e1", "materialType": "dream", "slug": "miasto-pod-guzikiem" },
-    { "materialId": "fac16e01-9b35-4b45-af07-0d6f5fb7bdb3", "materialType": "dream", "slug": "miasto-wynajelo-pogode" },
-    { "materialId": "33ab9a81-1ad5-4296-9e5f-422a0eb30808", "materialType": "dream", "slug": "orkiestra-swiata" },
-    { "materialId": "70f01299-9398-457d-9201-a754dac0342c", "materialType": "dream", "slug": "republika-głosowały-cienie" },
-    { "materialId": "209807fe-fb82-4667-a50b-7f0108986086", "materialType": "dream", "slug": "sen-o-trzecim-krzesle" },
-    { "materialId": "68f3d69b-8c2d-4b30-af53-e35a6221d89b", "materialType": "idea", "slug": "3154-rok-automatyzacja", "sourceMaterialId": "fbeed7dd-ffc3-4596-8f17-e6d65d2e7202" },
-    { "materialId": "2adb8fb5-9030-4a32-87ad-e0aa80076257", "materialType": "idea", "slug": "cywilizacja-nieomylna-automatyzacja", "sourceMaterialId": "d334f7cc-1b33-4739-ba4c-826fe560bf33" },
-    { "materialId": "280fb5ae-75dd-441e-b515-140b2037ad58", "materialType": "idea", "slug": "drzwi-ktore-pojawlily-sie-po-przejsciu-automatyzacja", "sourceMaterialId": "63471ca8-e034-4545-8b0f-8afe62a244c5" },
-    { "materialId": "d1bf2c12-d4fd-4463-ab3b-f55e6278ebcd", "materialType": "idea", "slug": "godzina-ktorej-nikt-nie-przezyl-automatyzacja", "sourceMaterialId": "18840f47-0fc0-4809-b2af-15706f83a9f3" },
-    { "materialId": "b5bfea29-2f6d-4831-b397-0862693b9747", "materialType": "idea", "slug": "krawcowa-nocy-automatyzacja", "sourceMaterialId": "38873cf8-b808-48d2-bea9-7ca0ce9a1f15" },
-    { "materialId": "267da084-3c15-41ee-9c8e-35e63cd71612", "materialType": "idea", "slug": "latarnia-strona-jutra-automatyzacja", "sourceMaterialId": "5f164633-2f20-4369-93ac-81515a5f81ae" },
-    { "materialId": "25215924-1042-4633-a2ca-4192574330fd", "materialType": "idea", "slug": "miasto-pod-guzikiem-automatyzacja", "sourceMaterialId": "beb5492e-3239-4850-96c9-66579d6a54e1" },
-    { "materialId": "13c1dc44-17dc-4931-b043-9f0fce819496", "materialType": "idea", "slug": "miasto-wynajelo-pogode-automatyzacja", "sourceMaterialId": "fac16e01-9b35-4b45-af07-0d6f5fb7bdb3" },
-    { "materialId": "a82b6de1-f40e-4916-aab7-25c69fdec199", "materialType": "idea", "slug": "orkiestra-swiata-automatyzacja", "sourceMaterialId": "33ab9a81-1ad5-4296-9e5f-422a0eb30808" },
-    { "materialId": "036256dd-93f4-4668-857e-0bd9e9213184", "materialType": "idea", "slug": "republika-głosowały-cienie-automatyzacja", "sourceMaterialId": "70f01299-9398-457d-9201-a754dac0342c" },
-    { "materialId": "f98eacca-b913-4b72-b900-6dd4f8db6925", "materialType": "idea", "slug": "sen-o-trzecim-krzesle-automatyzacja", "sourceMaterialId": "209807fe-fb82-4667-a50b-7f0108986086" }
+    {
+      "materialId": "fbeed7dd-ffc3-4596-8f17-e6d65d2e7202",
+      "materialType": "dream",
+      "slug": "3154-rok"
+    },
+    {
+      "materialId": "d334f7cc-1b33-4739-ba4c-826fe560bf33",
+      "materialType": "dream",
+      "slug": "cywilizacja-nieomylna"
+    },
+    {
+      "materialId": "63471ca8-e034-4545-8b0f-8afe62a244c5",
+      "materialType": "dream",
+      "slug": "drzwi-ktore-pojawlily-sie-po-przejsciu"
+    },
+    {
+      "materialId": "18840f47-0fc0-4809-b2af-15706f83a9f3",
+      "materialType": "dream",
+      "slug": "godzina-ktorej-nikt-nie-przezyl"
+    },
+    {
+      "materialId": "38873cf8-b808-48d2-bea9-7ca0ce9a1f15",
+      "materialType": "dream",
+      "slug": "krawcowa-nocy"
+    },
+    {
+      "materialId": "5f164633-2f20-4369-93ac-81515a5f81ae",
+      "materialType": "dream",
+      "slug": "latarnia-strona-jutra"
+    },
+    {
+      "materialId": "beb5492e-3239-4850-96c9-66579d6a54e1",
+      "materialType": "dream",
+      "slug": "miasto-pod-guzikiem"
+    },
+    {
+      "materialId": "fac16e01-9b35-4b45-af07-0d6f5fb7bdb3",
+      "materialType": "dream",
+      "slug": "miasto-wynajelo-pogode"
+    },
+    {
+      "materialId": "f8561363-7dc4-4c3c-9238-064ea2e1b097",
+      "materialType": "dream",
+      "slug": "ocean-na-lisciu"
+    },
+    {
+      "materialId": "33ab9a81-1ad5-4296-9e5f-422a0eb30808",
+      "materialType": "dream",
+      "slug": "orkiestra-swiata"
+    },
+    {
+      "materialId": "12a9cc7e-10b0-4070-926f-2712a32da62c",
+      "materialType": "dream",
+      "slug": "piekarnia-nastepnego-dnia"
+    },
+    {
+      "materialId": "70f01299-9398-457d-9201-a754dac0342c",
+      "materialType": "dream",
+      "slug": "republika-głosowały-cienie"
+    },
+    {
+      "materialId": "209807fe-fb82-4667-a50b-7f0108986086",
+      "materialType": "dream",
+      "slug": "sen-o-trzecim-krzesle"
+    },
+    {
+      "materialId": "68f3d69b-8c2d-4b30-af53-e35a6221d89b",
+      "materialType": "idea",
+      "slug": "3154-rok-automatyzacja",
+      "sourceMaterialId": "fbeed7dd-ffc3-4596-8f17-e6d65d2e7202"
+    },
+    {
+      "materialId": "2adb8fb5-9030-4a32-87ad-e0aa80076257",
+      "materialType": "idea",
+      "slug": "cywilizacja-nieomylna-automatyzacja",
+      "sourceMaterialId": "d334f7cc-1b33-4739-ba4c-826fe560bf33"
+    },
+    {
+      "materialId": "280fb5ae-75dd-441e-b515-140b2037ad58",
+      "materialType": "idea",
+      "slug": "drzwi-ktore-pojawlily-sie-po-przejsciu-automatyzacja",
+      "sourceMaterialId": "63471ca8-e034-4545-8b0f-8afe62a244c5"
+    },
+    {
+      "materialId": "d1bf2c12-d4fd-4463-ab3b-f55e6278ebcd",
+      "materialType": "idea",
+      "slug": "godzina-ktorej-nikt-nie-przezyl-automatyzacja",
+      "sourceMaterialId": "18840f47-0fc0-4809-b2af-15706f83a9f3"
+    },
+    {
+      "materialId": "b5bfea29-2f6d-4831-b397-0862693b9747",
+      "materialType": "idea",
+      "slug": "krawcowa-nocy-automatyzacja",
+      "sourceMaterialId": "38873cf8-b808-48d2-bea9-7ca0ce9a1f15"
+    },
+    {
+      "materialId": "267da084-3c15-41ee-9c8e-35e63cd71612",
+      "materialType": "idea",
+      "slug": "latarnia-strona-jutra-automatyzacja",
+      "sourceMaterialId": "5f164633-2f20-4369-93ac-81515a5f81ae"
+    },
+    {
+      "materialId": "25215924-1042-4633-a2ca-4192574330fd",
+      "materialType": "idea",
+      "slug": "miasto-pod-guzikiem-automatyzacja",
+      "sourceMaterialId": "beb5492e-3239-4850-96c9-66579d6a54e1"
+    },
+    {
+      "materialId": "13c1dc44-17dc-4931-b043-9f0fce819496",
+      "materialType": "idea",
+      "slug": "miasto-wynajelo-pogode-automatyzacja",
+      "sourceMaterialId": "fac16e01-9b35-4b45-af07-0d6f5fb7bdb3"
+    },
+    {
+      "materialId": "a82b6de1-f40e-4916-aab7-25c69fdec199",
+      "materialType": "idea",
+      "slug": "orkiestra-swiata-automatyzacja",
+      "sourceMaterialId": "33ab9a81-1ad5-4296-9e5f-422a0eb30808"
+    },
+    {
+      "materialId": "036256dd-93f4-4668-857e-0bd9e9213184",
+      "materialType": "idea",
+      "slug": "republika-głosowały-cienie-automatyzacja",
+      "sourceMaterialId": "70f01299-9398-457d-9201-a754dac0342c"
+    },
+    {
+      "materialId": "f98eacca-b913-4b72-b900-6dd4f8db6925",
+      "materialType": "idea",
+      "slug": "sen-o-trzecim-krzesle-automatyzacja",
+      "sourceMaterialId": "209807fe-fb82-4667-a50b-7f0108986086"
+    },
+    {
+      "materialId": "21626ab6-2746-4107-9bd7-780a0b597817",
+      "materialType": "dream",
+      "slug": "targ-pietnastu-sekund"
+    },
+    {
+      "materialId": "3a172a38-40b1-4fcb-ad34-2f0350136610",
+      "materialType": "idea",
+      "slug": "targ-pietnastu-sekund-automatyzacja-1",
+      "sourceMaterialId": "21626ab6-2746-4107-9bd7-780a0b597817"
+    },
+    {
+      "materialId": "2c999ab3-e9b6-4676-8958-3b0bf5d715da",
+      "materialType": "idea",
+      "slug": "ocean-na-lisciu-automatyzacja",
+      "sourceMaterialId": "f8561363-7dc4-4c3c-9238-064ea2e1b097"
+    },
+    {
+      "materialId": "a49055ab-a57b-44b9-8769-5baff3746162",
+      "materialType": "idea",
+      "slug": "piekarnia-nastepnego-dnia-automatyzacja",
+      "sourceMaterialId": "12a9cc7e-10b0-4070-926f-2712a32da62c"
+    }
   ]
 }
