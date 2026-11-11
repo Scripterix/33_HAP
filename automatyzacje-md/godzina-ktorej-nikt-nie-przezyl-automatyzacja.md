@@ -1,5 +1,6 @@
 ---
 publishedAt: "2026-10-25"
+dateStatus: placeholder
 ---
 
 <!-- STATUS: DRAFT; SOURCE: sny-iskry/godzina-ktorej-nikt-nie-przezyl.md; wymaga akceptacji człowieka -->

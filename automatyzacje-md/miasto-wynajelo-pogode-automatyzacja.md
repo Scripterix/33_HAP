@@ -1,5 +1,6 @@
 ---
 publishedAt: "2026-11-09"
+dateStatus: placeholder
 ---
 
 <!-- STATUS: DRAFT; SOURCE: sny-iskry/miasto-wynajelo-pogode.md; wymaga akceptacji człowieka -->

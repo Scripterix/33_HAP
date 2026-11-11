@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import SiteLayout from '../components/SiteLayout.astro';
+import SiteFooter from '../components/SiteFooter.astro';
 import { loadMaterialRegistry } from '../lib/material-registry.mjs';
 import { loadAllGenerationSidecars } from '../lib/generation-metadata.mjs';
 import { validateEvaluations } from '../lib/evaluation-validation.mjs';
@@ -16,9 +17,9 @@ const stats = calculateProjectStats({ registry, sidecars, evaluations });
 ---
 
 <SiteLayout title="Projekt HAP — Sny Iskry i Pomysły" description="Jak powstają Sny Iskry, interpretacje Writera i dalsze eksperymenty." current="project">
-  <p class="eyebrow">O projekcie</p>
+  <p class="eyebrow">Human-AI Publishing</p>
   <h1>Projekt HAP</h1>
-  <p class="page-intro">Projekt łączy niezależną opowieść literacką z późniejszą analizą jej idei. Najpierw powstaje Sen Iskry, którego treść nie jest podporządkowana produktom ani automatyzacjom. Dopiero później Writer szuka w nim pytań, mechanizmów i kierunków wartych sprawdzenia.</p>
+  <p class="page-intro">Projekt łączy niezależną opowieść literacką z późniejszą analizą jej idei. Najpierw powstaje Sen Iskry, którego treść nie jest podporządkowana produktom ani automatyzacjom. Później Writer publikuje interpretację i możliwe kierunki. Dopiero osobna decyzja człowieka może skierować wybrany pomysł do ewaluacji.</p>
 
   <ol class="process-flow" aria-label="Główne fazy projektu HAP">
     <li>Sen</li><li>Interpretacja i pomysł</li><li>Ewaluacja i decyzja</li><li>Eksperyment lub prototyp</li>
@@ -43,7 +44,7 @@ const stats = calculateProjectStats({ registry, sidecars, evaluations });
       <li>Writer otrzymuje gotowy, niezmieniany Sen Iskry.</li>
       <li>Oddziela metaforę literacką od możliwego zastosowania.</li>
       <li>Formułuje kierunki, ale nie przedstawia ich jako gotowych produktów.</li>
-      <li>Pomysł pozostaje hipotezą, a człowiek decyduje o dalszej ewaluacji.</li>
+      <li>Interpretacja trafia do publicznego archiwum, a człowiek osobno decyduje o ewentualnej ewaluacji pomysłu.</li>
     </ul>
     <p class="project-note">Writer nie dopisuje produktu do snu. Odkrywa możliwość dopiero w opowieści, która już powstała.</p>
   </section>
@@ -74,5 +75,5 @@ const stats = calculateProjectStats({ registry, sidecars, evaluations });
       <div><dt>Materiały bez danych kosztowych</dt><dd>{stats.missingCostMaterials}</dd></div>
     </dl>
   </section>
-  <footer>HAP · Opowieść, interpretacja i decyzja człowieka</footer>
+  <SiteFooter>HAP · Opowieść, interpretacja i decyzja człowieka</SiteFooter>
 </SiteLayout>

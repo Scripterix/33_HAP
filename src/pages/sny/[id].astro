@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import SiteLayout from '../../components/SiteLayout.astro';
 import MaterialInfo from '../../components/MaterialInfo.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
 import { findMaterial, loadMaterialRegistry } from '../../lib/material-registry.mjs';
 import { loadGenerationSidecar } from '../../lib/generation-metadata.mjs';
 export async function getStaticPaths() {
@@ -24,5 +25,5 @@ const metadata = await loadGenerationSidecar(process.cwd(), 'dream', material.ma
 </div>
 <article class="story"><Content /></article>
 {pomysl && <aside class="related"><p class="eyebrow">Z tego snu powstał pomysł</p><h2>Inna perspektywa tej historii</h2><p>Writer analizuje ideę, możliwości i konsekwencje wynikające z opowieści.</p><a class="text-action" href={`/pomysly/${pomysl.id}/`}>Przejdź do interpretacji →</a></aside>}
-<footer><a href="/">← Wszystkie sny</a></footer>
+<SiteFooter><a href="/">← Wszystkie sny</a></SiteFooter>
 </SiteLayout>

@@ -1,5 +1,6 @@
 ---
 publishedAt: "2026-10-21"
+dateStatus: placeholder
 ---
 
 <!-- STATUS: DRAFT; SOURCE: sny-iskry/3154-rok.md; wymaga akceptacji człowieka -->

@@ -1,5 +1,6 @@
 ---
 publishedAt: "2026-11-05"
+dateStatus: placeholder
 ---
 
 # Sen o trzecim krześle

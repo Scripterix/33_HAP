@@ -1,5 +1,6 @@
 ---
 publishedAt: "2026-11-02"
+dateStatus: placeholder
 ---
 
 <!-- STATUS: DRAFT; SOURCE: sny-iskry/orkiestra-swiata.md; wymaga akceptacji człowieka -->

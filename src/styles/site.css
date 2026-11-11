@@ -42,7 +42,9 @@ a { color: var(--link); }
 a:hover { color: var(--heading); }
 .eyebrow { font: 600 .8rem system-ui, sans-serif; letter-spacing: .11em; text-transform: uppercase; color: var(--accent); }
 p, li { font-size: 1.09rem; }
-footer { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font: .85rem system-ui, sans-serif; color: var(--muted); }
+footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font: .85rem system-ui, sans-serif; color: var(--muted); }
+.footer-copy { min-width: 0; }
+.repo-link { margin-left: auto; white-space: nowrap; }
 
 /* Wspólna nawigacja i przełącznik motywu */
 .nav { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 4rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); font: 500 .9rem var(--font-sans); }
@@ -75,8 +77,9 @@ footer { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--bord
 .card-description { display: -webkit-box; block-size: 4.95em; margin: 0; overflow: hidden; color: var(--muted); font-size: 1rem; line-height: 1.65; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
 .hint { display: block; color: var(--subtle); font: .77rem system-ui, sans-serif; margin-top: .3rem; }
 .content-card .eyebrow, .related .eyebrow { margin: 0; font-size: .69rem; color: var(--accent); }
-.card-actions { display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; margin-top: 1.2rem; font: 500 .9rem system-ui, sans-serif; }
-.content-card .card-actions { margin-top: 0; }
+.card-footer { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 1rem; }
+.card-actions { display: flex; min-width: 0; gap: 1.5rem; flex-wrap: wrap; align-items: center; font: 500 .9rem system-ui, sans-serif; }
+.card-date { color: var(--subtle); font: 500 .78rem var(--font-sans); white-space: nowrap; }
 .text-action { color: var(--link); font: 600 .9rem system-ui, sans-serif; }
 .subtle-link, .source-link { color: var(--muted); font: .88rem system-ui, sans-serif; }
 .related { margin-top: 3rem; }

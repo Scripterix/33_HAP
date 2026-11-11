@@ -1,5 +1,6 @@
 ---
 publishedAt: "2026-10-24"
+dateStatus: placeholder
 ---
 
 # Sen Iskry: Godzina, której nikt nie przeżył

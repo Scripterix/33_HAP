@@ -1,5 +1,6 @@
 ---
 publishedAt: "2026-11-09"
+dateStatus: placeholder
 ---
 
 # Sen Iskry: Miasto, które wynajęło pogodę

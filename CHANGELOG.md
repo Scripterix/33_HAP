@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.5 — 2026-11-10
+- Ujednolicono nazwę projektu jako „33_HAP — Human-AI Publishing”.
+- Rozdzielono publiczną prezentację interpretacji Writera od późniejszej, opcjonalnej ewaluacji pomysłu.
+- Nowe wyniki Writer CLI zachowują wskazanie snu źródłowego bez automatycznego oznaczenia `DRAFT`.
+- Dodano daty wyrównane do prawej strony dolnego wiersza kart snów i pomysłów.
+- Dodano wspólny link do repozytorium GitHub po prawej stronie stopek.
+
 ## 0.2.4 — 2026-11-09
 - Dodano stronę „Projekt HAP”, wspólne karty z line-clamp oraz dyskretny panel informacji na stronach materiałów.
 - Wprowadzono stabilne `materialId`, osobne ewaluacje i atomowo zapisywane sidecary metadanych generowania.

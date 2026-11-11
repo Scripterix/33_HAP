@@ -10,6 +10,12 @@ interface Props {
 
 const { eyebrow, title, href, description, headingLevel = 'h2', publishedAt } = Astro.props;
 const Heading = headingLevel;
+const publishedDate = publishedAt && !Number.isNaN(Date.parse(publishedAt))
+  ? new Date(`${publishedAt}T00:00:00Z`)
+  : null;
+const dateLabel = publishedDate
+  ? new Intl.DateTimeFormat('pl-PL', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(publishedDate)
+  : null;
 ---
 
 <article class="content-card" data-published-at={publishedAt}>
@@ -19,5 +25,8 @@ const Heading = headingLevel;
     <p class="card-description">{description}</p>
     <slot name="meta" />
   </div>
-  <div class="card-actions"><slot name="actions" /></div>
+  <div class="card-footer">
+    <div class="card-actions"><slot name="actions" /></div>
+    {publishedDate && dateLabel && <time class="card-date" datetime={publishedAt}>{dateLabel}</time>}
+  </div>
 </article>

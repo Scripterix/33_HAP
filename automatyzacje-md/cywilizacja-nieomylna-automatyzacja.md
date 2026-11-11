@@ -1,5 +1,6 @@
 ---
 publishedAt: "2026-11-08"
+dateStatus: placeholder
 ---
 
 <!-- STATUS: DRAFT; SOURCE: sny-iskry/cywilizacja-nieomylna.md; wymaga akceptacji człowieka -->

@@ -6,7 +6,17 @@
 - [ ] 0.3 — Writer + Critic, ocena sensowności automatyzacji.
   - [ ] Poprawić `config/writer.md`, aby koncepcje były bardziej oryginalne, konkretne i możliwe do wdrożenia.
   - [ ] Ponowić test Writera na wskazanym śnie.
-- [ ] 0.4 — Akceptacja szkicu i publikacja do oddzielnej kolekcji.
+- [x] 0.4 — Publiczna prezentacja interpretacji Writera obok Snów Iskry.
+- [ ] 0.4.1 — Wybór pomysłu do osobnej ewaluacji i ewentualnego eksperymentu.
+  - [ ] Przed implementacją przejrzeć i zabezpieczyć bieżący lokalny diff, a następnie uzgodnić integrację commita `8ec6035` z `origin/main` bez nadpisania pracy.
+  - [ ] Wybrać pierwszy pomysł: rekomendowana „Godzina, której nikt nie przeżył”; alternatywa „Latarnia — strona jutra”.
+  - [ ] Dodać jeden ręczny rekord w `ewaluacje-md/` z nowym `evaluationId`, istniejącym `ideaId`, statusem `Nowy` i jawnym brakiem decyzji człowieka.
+  - [ ] Oddzielić w rekordzie fakty, przesłanki, hipotezy i szacunki oraz opisać minimalny, lokalny i odwracalny eksperyment z kryterium powodzenia i przerwania.
+  - [ ] Nie zmieniać walidatora ani widoków, o ile próbny rekord nie wykaże konkretnej luki w istniejącym kontrakcie.
+  - [ ] Zweryfikować relacje sen–pomysł–ewaluacja, warunkowy link na stronie pomysłu, statystyki, desktop/mobile, `npm test`, `npm run check` i `npm run build`.
+  - [ ] Po przeglądzie człowieka zapisać jego decyzję osobno od statusu technicznego ewaluacji.
+- [ ] 0.4.2 — Po ocenie Etapu A rozważyć `npm run evaluate -- <idea-slug>` generujące propozycję, bez automatycznej decyzji.
+- [ ] 0.4.3 — Później rozważyć wersjonowany loop ponownej ewaluacji bez niszczenia historii.
 - [ ] 0.5 — GitHub → Cloudflare Pages.
 - [ ] 0.6 — Scheduler, monitorowanie kosztów i stanów.
   - [x] Zapisywanie przyszłych danych `usage` i snapshotu stawek w sidecarach.

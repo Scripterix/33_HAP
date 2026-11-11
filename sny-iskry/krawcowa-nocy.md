@@ -1,5 +1,6 @@
 ---
 publishedAt: "2026-10-26"
+dateStatus: placeholder
 ---
 
 # Sen Iskry: Krawcowa nocy

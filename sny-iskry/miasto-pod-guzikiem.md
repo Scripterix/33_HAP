@@ -1,5 +1,6 @@
 ---
 publishedAt: "2026-10-30"
+dateStatus: placeholder
 ---
 
 # Miasto pod zgubionym guzikiem

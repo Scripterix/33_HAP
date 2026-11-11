@@ -1,5 +1,6 @@
 ---
 publishedAt: "2026-11-03"
+dateStatus: placeholder
 ---
 
 # Sen Iskry: Republika, w której głosowały cienie

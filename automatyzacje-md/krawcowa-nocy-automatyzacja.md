@@ -1,5 +1,6 @@
 ---
 publishedAt: "2026-10-27"
+dateStatus: placeholder
 ---
 
 <!-- STATUS: DRAFT; SOURCE: sny-iskry/krawcowa-nocy.md; wymaga akceptacji człowieka -->

@@ -1,5 +1,6 @@
 ---
 publishedAt: "2026-10-31"
+dateStatus: placeholder
 ---
 
 <!-- STATUS: DRAFT; SOURCE: sny-iskry/miasto-pod-guzikiem.md; wymaga akceptacji człowieka -->

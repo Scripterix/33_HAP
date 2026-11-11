@@ -112,7 +112,7 @@ async function writer(filename) {
   const dream = await readFile(path.join(dreams, filename), 'utf8');
   const instructions = await readFile(path.join(root, 'config/writer.md'), 'utf8');
   const result = await generate(instructions, `Sen źródłowy: ${filename}\n\n${dream}`);
-  const output = `<!-- STATUS: DRAFT; SOURCE: sny-iskry/${filename}; wymaga akceptacji człowieka -->\n\n${result.text}\n`;
+  const output = `<!-- SOURCE: sny-iskry/${filename} -->\n\n${result.text}\n`;
   const filepath = await saveNew(ideas, `${path.basename(filename, '.md')}-automatyzacja`, output);
   const metadata = await recordWithoutRiskingContent({
     filepath,
@@ -122,7 +122,7 @@ async function writer(filename) {
     purpose: 'idea_interpretation',
     processVersion: 'writer-v1'
   });
-  console.log(`Zapisano szkic: ${path.relative(root, filepath)}`);
+  console.log(`Zapisano interpretację Writera: ${path.relative(root, filepath)}`);
   if (metadata) console.log(`Material ID: ${metadata.materialId}; run ID: ${metadata.run.runId}`);
   console.log(`Zużycie tokenów (API): ${JSON.stringify(result.usage || {})}`);
 }

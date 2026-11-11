@@ -1,5 +1,6 @@
 ---
 publishedAt: "2026-11-01"
+dateStatus: placeholder
 ---
 
 # Sen Iskry: Orkiestra, która utrzymywała świat na ziemi

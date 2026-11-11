@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import SiteLayout from '../../../components/SiteLayout.astro';
+import SiteFooter from '../../../components/SiteFooter.astro';
 import { findMaterialById, loadMaterialRegistry } from '../../../lib/material-registry.mjs';
 import { validateEvaluations } from '../../../lib/evaluation-validation.mjs';
 
@@ -49,5 +50,5 @@ const fields = [
     {fields.map(([label, value]) => <section><h2>{label}</h2><p>{value}</p></section>)}
     <Content />
   </article>
-  <footer><a href={`/pomysly/${idea.slug}/`}>← Wróć do pomysłu</a></footer>
+  <SiteFooter><a href={`/pomysly/${idea.slug}/`}>← Wróć do pomysłu</a></SiteFooter>
 </SiteLayout>

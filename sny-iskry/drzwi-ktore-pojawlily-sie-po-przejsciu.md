@@ -1,5 +1,6 @@
 ---
 publishedAt: "2026-10-22"
+dateStatus: placeholder
 ---
 
 # Sen Iskry: Drzwi, które pojawiały się dopiero po przejściu

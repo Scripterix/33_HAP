@@ -1,5 +1,6 @@
 ---
 publishedAt: "2026-11-06"
+dateStatus: placeholder
 ---
 
 <!-- STATUS: DRAFT; SOURCE: sny-iskry/sen-o-trzecim-krzesle.md; wymaga akceptacji człowieka -->

@@ -1,5 +1,6 @@
 ---
 publishedAt: "2026-10-29"
+dateStatus: placeholder
 ---
 
 <!-- STATUS: DRAFT; SOURCE: sny-iskry/latarnia-strona-jutra.md; wymaga akceptacji człowieka -->

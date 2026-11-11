@@ -1,5 +1,6 @@
 ---
 publishedAt: "2026-11-04"
+dateStatus: placeholder
 ---
 
 <!-- STATUS: DRAFT; SOURCE: sny-iskry/republika-głosowały-cienie.md; wymaga akceptacji człowieka -->

@@ -1,5 +1,6 @@
 ---
 publishedAt: "2026-10-28"
+dateStatus: placeholder
 ---
 
 # Sen Iskry: Latarnia po drugiej stronie jutra

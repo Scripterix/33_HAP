@@ -1,5 +1,6 @@
 ---
 publishedAt: "2026-11-07"
+dateStatus: placeholder
 ---
 
 # Sen Iskry: Cywilizacja, która nigdy się nie pomyliła

@@ -1,5 +1,6 @@
 ---
 publishedAt: "2026-10-23"
+dateStatus: placeholder
 ---
 
 <!-- STATUS: DRAFT; SOURCE: sny-iskry/drzwi-ktore-pojawlily-sie-po-przejsciu.md; wymaga akceptacji człowieka -->
